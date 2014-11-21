@@ -3,7 +3,7 @@ Contributors: johnny5
 Donate link: http://urbangiraffe.com/about/
 Tags: translate, pirate
 Requires at least: 2.3
-Tested up to: 3.2.1
+Tested up to: 4.1
 Stable tag: trunk
 
 Translate your blog into Pirate
@@ -38,5 +38,5 @@ Full documentation can be found on the [Redirection](http://urbangiraffe.com/plu
 
 == Changelog ==
 
-= 0.1 = 
+= 0.1 =
 * New version

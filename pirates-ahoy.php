@@ -76,27 +76,27 @@ class Pirates_Ahoy {
 			'user'       => 'sea dog',
 			'admin'      => 'captain'
 		);
-		
+
 		$endings = array(
 			'ing'  => "in'",
 			'ings' => "in's"
 		);
-		
+
 		$middles = array(
 			'v' => "'"
 		);
-		
+
 		$lower = strtolower( $text );
 		if ( isset( $convert[$lower] ) ) {
 			if ( is_array( $convert[$lower] ) )
 				$pirate = $convert[$lower][array_rand( $convert[$lower] )];
 			else
 				$pirate = $convert[$lower];
-			
+
 			// Check case
 			if ( strtoupper( $text[0] ) == $text[0] )
 				$pirate[0] = strtoupper( $pirate[0] );
-				
+
 			return $pirate;
 		}
 
@@ -105,14 +105,14 @@ class Pirates_Ahoy {
 			if ( substr( $text, -strlen( $ending) ) == $ending )
 				$text = str_replace( $ending, $new_ending, $text );
 		}
-		
+
 		// Middles
 		if ( strlen( $text ) > 4 ) {
 			foreach ( $middles AS $middle => $new_ending ) {
 				$text = preg_replace( '@^(.+?)'.$middle.'(.+)$@i', '$1'.$new_ending.'$2', $text );
 			}
 		}
-		
+
 		return $text;
 	}
 
@@ -131,7 +131,7 @@ class Pirates_Ahoy {
 
 		$parts = preg_split( '/('.implode( '|', $delimiters ).')/i', $string, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY );
 		$cnt   = count( $parts );
-		
+
 		for ( $i = 0; $i < $cnt; ++$i) {
 		    $isdelim = false;
 		    foreach ( $delimiters as $delim ) {
@@ -140,24 +140,24 @@ class Pirates_Ahoy {
 	            break;
 		        }
 		    }
-		
+
 		    if ( $isdelim )
 					continue;
 
 		    $parts[$i] = preg_replace_callback( '/[a-z]+/i', array('Pirates_Ahoy', 'word2pirate'),$parts[$i] );
 		}
-	
+
 		// Combine
 		$combine = array(
 			"o'",
 			" t'",
 		);
-		
+
 		$string = implode( '', $parts );
 		foreach ( $combine AS $comb ) {
 			$string = str_replace( $comb.' ', $comb, $string );
 		}
-		
+
 		$string = str_replace( "t't", "t'", $string );
 		return str_replace( "''", "'", $string );
 	}
@@ -177,7 +177,7 @@ class Pirates_Ahoy {
 			'Nov_November_abbreviation',
 			'Dec_December_abbreviation'
 		);
-		
+
 		if ( in_array( $original, $ignore ) )
 			return $original;
 	  return Pirates_Ahoy::translation2pirate( $original );
